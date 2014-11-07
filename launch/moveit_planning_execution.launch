@@ -4,10 +4,11 @@
  # and the current state of the world as seen by the planner.
  <include file="$(find nextage_moveit_perception)/launch/move_group.launch">
   <arg name="publish_monitored_planning_scene" value="true" />
-  <arg name="moveit_sensor_manager" value="moveit_sensor_manager_kinect"/>
+  <arg name="sensors_config" value="sensors_kinect_point_cloud"/>
  </include>
 
  <include file="$(find openni_launch)/launch/openni.launch"/>
+ <node pkg="tf" type="static_transform_publisher" name="haed_joint_2_camera_link" args="0 0 0 0 0 0 /HEAD_JOINT1_Link /camera_link 100"/>
 
  <include file="$(find nextage_moveit_config)/launch/moveit_rviz.launch"> 
     <arg name="config" value="true"/>

@@ -1,7 +1,8 @@
 <launch>
-    <rosparam command="load" file="$(find nextage_moveit_perception)/config/sensors_kinect_point_cloud.yaml" />
-    <node pkg="tf" type="static_transform_publisher" name="haed_joint_2_camera_link" args="0 0 0 0 0 0 /HEAD_JOINT1_Link /camera_link 100"/>
-    <param name="octomap_frame" type="string" value="HEAD_JOINT1_Link" />
-    <param name="octomap_resolution" type="double" value="0.05" />
-    <param name="max_range" type="double" value="5.0" />
+    <arg name="sensors_config" default="sensors_kinect_point_cloud"/>
+
+    <rosparam command="load" file="$(find nextage_moveit_perception)/config/$(arg sensors_config).yaml" />
+    <param name="octomap_frame" type="string" value="WAIST"/>
+    <param name="octomap_resolution" type="double" value="0.05"/>
+    <param name="max_range" type="double" value="5.0"/>
 </launch>
