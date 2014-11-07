@@ -1,0 +1,8 @@
+<launch>
+    <arg name="sensors_config" default="sensors_kinect_point_cloud"/>
+
+    <rosparam command="load" file="$(find nextage_moveit_perception)/config/$(arg sensors_config).yaml" />
+    <param name="octomap_frame" type="string" value="WAIST"/>
+    <param name="octomap_resolution" type="double" value="0.05"/>
+    <param name="max_range" type="double" value="5.0"/>
+</launch>

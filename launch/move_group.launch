@@ -14,7 +14,7 @@
   <arg name="max_safe_path_cost" default="1"/>
   <arg name="jiggle_fraction" default="0.05" />
   <arg name="publish_monitored_planning_scene" default="true"/>
-  <arg name="moveit_sensor_manager" default="moveit_sensor_manager_kinect"/>
+  <arg name="sensors_config" default="sensors_kinect_point_cloud"/>
 
   <include ns="move_group" file="$(find nextage_moveit_config)/launch/planning_pipeline.launch">
     <arg name="pipeline" value="ompl" />
@@ -25,7 +25,9 @@
     <arg name="moveit_manage_controllers" value="true" />
   </include>
 
-  <include ns="move_group" file="$(find nextage_moveit_perception)/launch/$(arg moveit_sensor_manager).launch" if="$(arg allow_trajectory_execution)"/>
+  <include ns="move_group" file="$(find nextage_moveit_perception)/launch/moveit_sensor_manager.launch" if="$(arg allow_trajectory_execution)">
+    <arg name="sensors_config" value="$(arg sensors_config)"/>
+  </include>
 
   <node name="move_group" launch-prefix="$(arg launch_prefix)" pkg="moveit_ros_move_group" type="move_group" respawn="false" output="screen" args="$(arg command_args)">
     <!-- Set the display variable, in case OpenGL code is used internally -->
